@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "redirects",
+  "info": {
+    "singularName": "redirect",
+    "pluralName": "redirects",
+    "displayName": "redirect"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": ""
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": false
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "attributes": {
+    "source": {
+      "type": "string",
+      "required": true,
+      "default": "/"
+    },
+    "destination": {
+      "type": "string",
+      "required": true,
+      "default": "/"
+    }
+  }
+}
