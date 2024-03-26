@@ -1,6 +1,6 @@
 {
   "name": "strapi-redirects",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Create redirects for your Vercel project, including deploy.",
   "license": "MIT",
   "author": {
