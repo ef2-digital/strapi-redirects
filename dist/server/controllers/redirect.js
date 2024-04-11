@@ -1,4 +1,5 @@
 "use strict";
+//@ts-nocheck
 /**
  *  controller
  */
@@ -16,6 +17,12 @@ exports.default = strapi_1.factories.createCoreController("plugin::redirects.red
         var _a;
         const sanitizedQuery = await this.sanitizeQuery(ctx);
         const { source, destination } = ctx.request.body.data;
+        if (!source.startsWith("/") || !destination.startsWith("/")) {
+            return {
+                data: {},
+                error: "Source and Destination both need to start with an '/' character.",
+            };
+        }
         const entry = (await strapi.entityService.findMany("plugin::redirects.redirect", { filters: { source, destination } }));
         if (entry.length > 0) {
             return { data: {}, error: "Entry already exists" };

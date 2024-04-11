@@ -5,6 +5,8 @@
 import { factories } from "@strapi/strapi";
 import { errors } from "@strapi/utils";
 
+const fetch = require("node-fetch");
+
 function getPluginStore() {
   return strapi.store({
     environment: "",
@@ -98,7 +100,7 @@ export default factories.createCoreService(
       time: number
     ) {
       const url = `https://api.vercel.com/v6/deployments?projectId=${projectId}&teamId=${team}&meta-deployHookRef=${branch}&limit=1&${filter}=${time}`;
-      const headers = new Headers({
+      const headers = new fetch.Headers({
         Authorization: `Bearer ${token}`,
       });
 

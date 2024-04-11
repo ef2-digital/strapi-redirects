@@ -5,6 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const strapi_1 = require("@strapi/strapi");
 const utils_1 = require("@strapi/utils");
+const fetch = require("node-fetch");
 function getPluginStore() {
     return strapi.store({
         environment: "",
@@ -67,7 +68,7 @@ exports.default = strapi_1.factories.createCoreService("plugin::redirects.redire
     },
     async deploy(token, team, projectId, branch, filter, time) {
         const url = `https://api.vercel.com/v6/deployments?projectId=${projectId}&teamId=${team}&meta-deployHookRef=${branch}&limit=1&${filter}=${time}`;
-        const headers = new Headers({
+        const headers = new fetch.Headers({
             Authorization: `Bearer ${token}`,
         });
         const deploysJson = await fetch(url, {

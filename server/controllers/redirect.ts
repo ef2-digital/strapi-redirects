@@ -1,3 +1,4 @@
+//@ts-nocheck
 /**
  *  controller
  */
@@ -20,6 +21,14 @@ export default factories.createCoreController(
     async upsert(ctx, next) {
       const sanitizedQuery = await this.sanitizeQuery(ctx);
       const { source, destination } = ctx.request.body.data;
+
+      if (!source.startsWith("/") || !destination.startsWith("/")) {
+        return {
+          data: {},
+          error:
+            "Source and Destination both need to start with an '/' character.",
+        };
+      }
 
       const entry = (await strapi.entityService.findMany(
         "plugin::redirects.redirect",

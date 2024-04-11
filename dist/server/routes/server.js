@@ -24,6 +24,15 @@ exports.default = {
         {
             method: "GET",
             path: "/",
+            handler: "redirect.find",
+            config: {
+                auth: false,
+                policies: [],
+            },
+        },
+        {
+            method: "GET",
+            path: "/",
             handler: "redirect.dashboard",
             config: {
                 auth: false,

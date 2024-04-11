@@ -1,6 +1,6 @@
 {
   "name": "strapi-redirects",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Create redirects for your Vercel project, including deploy.",
   "license": "MIT",
   "author": {
@@ -19,6 +19,7 @@
     "@strapi/design-system": "^1.6.3",
     "@strapi/helper-plugin": "^4.6.0",
     "@strapi/icons": "^1.6.3",
+    "node-fetch": "2.6.1",
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
