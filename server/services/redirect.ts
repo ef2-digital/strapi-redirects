@@ -125,10 +125,19 @@ export default factories.createCoreService(
 
       const { token, team, projectId, deploymentUrl, branch } = settings?.data;
 
+      const headers = new fetch.Headers({
+        Authorization: `Bearer ${token}`,
+      });
+
       const jobJson: any = await fetch(deploymentUrl, {
         method: "post",
         mode: "cors",
+        headers,
       }).then((res) => res.json());
+
+      if (!jobJson.job) {
+        throw new Error(`Deployment not received`);
+      }
 
       const job = jobJson.job;
       const jobTime = job.createdAt;

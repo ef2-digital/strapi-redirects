@@ -77,6 +77,7 @@ exports.default = strapi_1.factories.createCoreService("plugin::redirects.redire
             headers,
         }).then((res) => res.json());
         const deploy = deploysJson === null || deploysJson === void 0 ? void 0 : deploysJson.deployments;
+        console.log(deploysJson);
         if (deploy.length > 0) {
             return deploy[0].state;
         }
@@ -86,10 +87,17 @@ exports.default = strapi_1.factories.createCoreService("plugin::redirects.redire
         const pluginStore = getPluginStore();
         let settings = await pluginStore.get({ key: "settings" });
         const { token, team, projectId, deploymentUrl, branch } = settings === null || settings === void 0 ? void 0 : settings.data;
+        const headers = new fetch.Headers({
+            Authorization: `Bearer ${token}`,
+        });
         const jobJson = await fetch(deploymentUrl, {
             method: "post",
             mode: "cors",
+            headers,
         }).then((res) => res.json());
+        if (!jobJson.job) {
+            throw new Error(`Deployment not received`);
+        }
         const job = jobJson.job;
         const jobTime = job.createdAt;
         return new Promise((resolve, reject) => {
